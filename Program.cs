@@ -3,45 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
-namespace ConsolnoePrilogenie
+namespace ConsoleApplication2
 {
 	class Program
 	{
 		static void Main(string[] args)
 		{
 			bool ff;
-			do {
-				Console.Write("Ввод:");
-				string text = Console.ReadLine();
-				int len = text.Length;
-				bool flag = true;
-
-				for (int i = 0; i < len / 2; i++)
+			string[] len = File.ReadAllLines(@"C:\Users\047-19\Desktop\val.txt");
+			do
+			{
+				foreach (var text in len)
 				{
-					if (text[i] != text[len - (i + 1)])
+					bool flag = true;
+					for (int i = 0; i < text.Length / 2; i++)
 					{
-						flag = false;
-						break;
+						if (text[i] != text[text.Length - (i + 1)])
+						{
+							flag = false;
+							break;
+						}
 					}
+					if (flag)
+						Console.WriteLine("{0} является палиндромом", text);
+					else
+						Console.WriteLine("{0} не является палиндромом", text);
 				}
-				if (flag)
-				{
-					Console.WriteLine("{0} является палиндромом", text);
-				}
-				else
-				{
-					Console.WriteLine("{0} не является палиндромом", text);
-				}
-				Console.WriteLine("Для продолжения нажмите (1)");
-				int q = Int32.Parse(Console.ReadLine());
-				if (q == 1) ff = true;
-				else ff = false;
-				Console.Clear();
+					Console.WriteLine("Для продолжения нажмите (1)");
+					int q = Int32.Parse(Console.ReadLine());
+					if (q == 1) ff = true;
+					else ff = false;
+					Console.Clear();
 			}
-			while (ff==true);
+			while (ff == true);
+
+				Console.ReadLine();
 			
-			Console.ReadLine();
-		}
+	   }
 	}
-}
+} 
